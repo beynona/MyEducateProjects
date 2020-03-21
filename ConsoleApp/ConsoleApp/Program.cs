@@ -2,13 +2,363 @@
 
 namespace ConsoleApp
 {
+    
+
     class Program
     {
+     
+    
+
         static void Main(string[] args)
         {
-            Console.WriteLine("\tУрок 9: ");
+            Console.WriteLine("\tУрок 23: Кортежи");
 
             /*
+            
+            Console.WriteLine("\tУрок 22: Кортежи");
+            private static (int, string) GetSecretsValue()
+            {
+                var SecretsValue = (23, "Zenua");
+                return SecretsValue;
+            }
+            private static (int sum, int cout) GetNuf(int[] massiv)
+            {
+                var results = (sum: 0, cout: 0);
+                for (int i = 0; i < massiv.Length; i++)
+                {
+                    results.sum += massiv[i];
+                    results.cout++;
+                }
+                return results;
+            }
+
+            private static (string name, int age) GetAnotherAge((string n, int a) personaj, int fu)
+            {
+                var results = (name: personaj.n, age: personaj.a + fu);
+                return results;
+            }
+
+            var Prostoj = (1, "Tom");
+            var Slojnij = (id: 1, name: "Tom");
+            (string, int, double) Personaj = ("riki", 12, 32.2);
+            var (namee, agee) = ("Tom", 23);
+
+            var (sum, cout) = GetNuf(new int[] { 1, 2, 3, 4, 5 });
+            Console.WriteLine("Summ=" + sum);
+            Console.WriteLine("Cout=" + cout);
+
+            var (name, age) = GetAnotherAge(("Jenua", 23), 32);
+            Console.WriteLine("Name=" + name);
+            Console.WriteLine("Age=" + age);
+
+            
+        Console.WriteLine("\tУрок 21: Перечисление enum");
+        enum Operation
+        {
+            Add,
+            Sub,
+            Milti,
+            Div
+        }
+
+        static void matSum(double x, double y, Operation op)
+        {
+            double res = 0;
+            switch (op)
+            {
+                case Operation.Add:
+                    res = x + y; break;
+                case Operation.Div:
+                    res = x - y; break;
+                case Operation.Milti:
+                    res = x * y; break;
+                case Operation.Sub:
+                    res = x / y; break;
+            }
+            Console.WriteLine(res);
+        }
+
+            matSum(2, 4, Operation.Add);
+            matSum(2, 4, Operation.Div);
+            matSum(2, 4, Operation.Milti);
+            matSum(2, 4, Operation.Sub);
+
+            Console.WriteLine("\tУрок 19: Рекурсивные функции");
+            static int Factorial(int n)
+            {
+                if (n == 0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return n * Factorial(n - 1);
+                }
+            }
+
+            static int Fibonachi(int n)
+            {
+                if (n == 0 || n == 1)
+                {
+                    return n;
+                }
+                else
+                {
+                    return Fibonachi(n - 1) + Fibonachi(n - 2);
+                }
+            }
+            Console.WriteLine("Факториал - "+Factorial(4));
+            Console.WriteLine("Фибоначи - "+Fibonachi(4));
+
+            Console.WriteLine("\tУрок 18: Массив параметров и ключевое слово \"Params\"");
+            static void Addition(params int[] Masisv)
+            {
+                int Sum = 0;
+                for (int i = 0; i < Masisv.Length; i++)
+                {
+                    Sum += Masisv[i];
+                }
+                Console.WriteLine($"Сумма элементов массива = {Sum}");
+            }
+            int[] massiv_in_Main = new int[] { 2, 4, 6, 8 };
+
+            Addition();
+            Addition(1, 2, 3, 4);
+            Addition(massiv_in_Main);
+
+            Console.WriteLine("\tУрок 17: Передача параметров по ссылке");
+
+            static void Peri(int a, int b)
+            {
+                a = a + b;
+                Console.WriteLine($"a + b (обычная) = {a}");
+            }
+            static void PeriRef(ref int a, int b)
+            {
+                a = a + b;
+                Console.WriteLine($"a + b (ref) = {a}");
+            }
+            static void Rerk(int a, int b, out int z)
+            {
+
+                z = a + b;
+            }
+
+            int z = 4;
+            int b = 6;
+            int aq;
+            Console.WriteLine($"Изначальная z = {z}, b = {b}");
+            Rerk(z, b, out aq);
+            Console.WriteLine($"aq before ref = {aq}");
+            Peri(z, b);
+            
+            Console.WriteLine($"z = {z}");
+            PeriRef(ref z, b);
+          
+            Console.WriteLine($"z = {z}");
+          
+            Rerk(z, b, out aq);
+            Console.WriteLine($"aq after ref = {aq}");
+
+            Console.WriteLine("\tУрок 16: Методы");
+            static void Prima()
+            {
+                int a = 5;
+                int b = 6;
+                if (a + b > 10)
+                {
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("5+6 >10?");
+                }
+            }
+            static void SayHello() => Console.WriteLine("It's work");
+            Prima();
+            SayHello();
+            
+            Console.WriteLine("\tУрок 15: Сортировка массива");
+
+            int[] num = new int[7];
+            for (int i = 0; i < num.Length; i++)
+            {
+                Console.Write("{0}-е число: ", i + 1);
+                num[i] = Int32.Parse(Console.ReadLine());
+
+            }
+            int temp;
+            for (int i = 0; i < num.Length - 1; i++)
+            {
+                for (int j = i + 1; j < num.Length; j++)
+                {
+                    if (num[i] > num[j])
+                    {
+                        temp = num[i];
+                        num[i] = num[j];
+                        num[j] = temp;
+                    }
+                }
+            }
+            for (int i = 0; i < num.Length; i++)
+            {
+                Console.WriteLine(num[i]);
+            }
+
+            Console.WriteLine("\tУрок 14: Инверсия массива");
+            int[] num = { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4 };
+            int n = num.Length;
+            int k = n / 2;
+            int temp;
+            for (int i = 0; i < k; i++)
+            {
+                temp = num[i];
+                num[i] = num[n - i - 1];
+                num[n - i - 1] = temp;
+            }
+            foreach (int Nu in num)
+            {
+                Console.WriteLine(Nu);
+            }  
+             
+            Console.WriteLine("\tУрок 13: Многомерные массивы");
+            int[,] num = { { 0, 1, 2, 3 }, { 4, 5, 6, 7 } };
+
+            int[][] numer = new int[3][];
+            numer[0] = new int[2] { 1, 2 };
+            numer[1] = new int[3] { 1, 2, 3 };
+            numer[2] = new int[5] { 1, 2, 3, 4, 5 };
+
+            Console.WriteLine("\tУрок 12: Массивы и foreach"); 
+            int[] num = new int[4] { 1, 5, 3, 4 };
+            int[] num2 = new int[] { 1, 2, 3, 4 };
+            int[] num3 = new[] { 1, 2, 3, 4 };
+            int[] num4 = { 1, 2, 3, 4 };
+            int[] num5 = new int[4];
+            num5[0] = 1;
+            num5[1] = 2;
+            num5[2] = 3;
+            num5[3] = 4;
+
+            foreach (int i in num)
+            {
+                Console.Write(i);
+            }
+            Console.WriteLine();
+            for (int i=0; i<num.Length;i++)
+            {
+                Console.Write(num[i]);
+            }
+
+            Console.WriteLine("\tУрок 11: Циклы");
+
+            int j=0, k=0;
+            
+            for (int i = 0; i<9;i++)
+            {
+                Console.Write($"{i} ");
+            }
+            Console.WriteLine();
+
+            while (j<9)
+            {
+                Console.Write($"{j} ");
+                j++;
+            }
+            Console.WriteLine();
+
+            do
+            {
+                Console.Write($"{k} ");
+                k++;
+            }
+            while (k<9);
+            Console.WriteLine();
+
+            for (int i = 0; i < 9; i++)
+            {
+                Console.Write($"{i} ");
+                if (i == 5) break;
+            }
+
+            Console.WriteLine("\tУрок 10: Условные конструкции");
+            int num1 = 8;
+            int num2 = 10;
+            if (num1<num2)
+            {
+                Console.WriteLine("8<10");
+            }
+            else
+            {
+                Console.WriteLine("8>10");
+            }
+            
+            if (true)
+            {
+                Console.WriteLine("True");
+            }
+
+            string select = Console.ReadLine();
+            switch (select)
+            {
+                case "A":
+                    Console.WriteLine("A");
+                    break;
+                case "B":
+                    Console.WriteLine("B");
+                    break;
+                default:
+                    Console.WriteLine("Breake");
+                    break;
+            }
+
+            int num3 = 1;
+            switch (num3)
+            {
+                case 1:
+                    Console.WriteLine("1 case");
+                    goto case 5;
+                case 5:
+                    Console.WriteLine("5 case");
+                    break;
+                default:
+                    break;
+            }
+            
+            Console.WriteLine("\tУрок 9: Условные выражения и логические операции");
+            int a = 10;
+            int b = 15;
+            bool c = a == b;
+            bool c1 = a != b;
+            bool c2 = a < b;
+            bool c3 = a > b;
+            bool c4 = a <= b;
+            bool c5 = a >= b;
+            Console.WriteLine($"a={a}, b={b}\n" +
+                $"a == b = {c}\n" +
+                $"a != b = {c1}\n" +
+                $"a < b = {c2}\n" +
+                $"a > b = {c3}\n" +
+                $"a <= b = {c4}\n" +
+                $"a >= b = {c5}\n");
+
+            bool x1 = (5 > 6) || (4 < 6);
+            bool x2 = (5 > 6) || (4 > 6);
+            bool x3 = (5 > 6) && (4 > 6);
+            bool x4 = (5 < 6) && (4 < 6);
+            bool Tru = true;
+            bool Fal = !Tru;
+            bool x5 = (5 > 6) ^ (4 < 6);
+            bool x6 = (10 > 6) ^ (4 < 6);
+            Console.WriteLine($"(5 > 6) || (4 < 6) = {x1}\n" +
+                $"(5 > 6) || (4 > 6) = {x2}\n" +
+                $"(5 > 6) && (4 > 6) = {x3}\n" +
+                $"(5 < 6) && (4 < 6) = {x4}\n" +
+                $"(5 > 6) ^ (4 < 6) = {x5}\n" +
+                $"(5 > 6) || (4 > 6) = {x6}\n" +
+                $"Tru = true   - {Tru} \n" +
+                $"Fal = !Tru   - {Fal}");
+            
             Console.WriteLine("\tУрок 8: Операции присваивания");
             int a = 10;
             Console.WriteLine($"a={a}\n" +
