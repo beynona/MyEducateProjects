@@ -2,19 +2,187 @@
 
 namespace ConsoleApp
 {
-    
 
     class Program
     {
-     
-    
 
+        
         static void Main(string[] args)
         {
-            Console.WriteLine("\tУрок 23: Кортежи");
-
+            Console.WriteLine("\tУрок 33: null");
+            
+            
             /*
             
+            
+            Console.WriteLine("\tУрок 32: Перегрузка операторов");
+              class Counter
+            {
+                public int Value { get; set; }
+                public static Counter operator /(Counter c1, Counter c2)
+                {
+                    return new Counter { Value = c1.Value / c2.Value };
+                }
+                public static int operator +(Counter c1, int val)
+                {
+                    return c1.Value + val;
+                }
+                public static Counter operator ++(Counter c1)
+                {
+                    return new Counter { Value = c1.Value + 10 };
+                }
+                public static bool operator true(Counter c1)
+                {
+                    return c1.Value != 0;
+                }
+                public static bool operator false(Counter c1)
+                {
+                    return c1.Value == 0;
+                }
+            }
+
+            Console.WriteLine("\tУрок 31: Константы");
+            const double PI = 3.14;
+            public readonly double k = 23;
+
+            Console.WriteLine("\tУрок 30: Статические члены и модификатор static");
+                    class Account
+            {
+                public Account(decimal sum, decimal rate)
+                {
+                    if (sum < MinSum) throw new Exception("Недопустимая сумма!");
+                    Sum = sum; Rate = rate;
+                }
+                private static decimal minSum = 100; // минимальная допустимая сумма для всех счетов
+                public static decimal MinSum
+                {
+                    get { return minSum; }
+                    set { if (value > 0) minSum = value; }
+                }
+
+                public decimal Sum { get; private set; }    // сумма на счете
+                public decimal Rate { get; private set; }   // процентная ставка
+
+                // подсчет суммы на счете через определенный период по определенной ставке
+                public static decimal GetSum(decimal sum, decimal rate, int period)
+                {
+                    decimal result = sum;
+                    for (int i = 1; i <= period; i++)
+                        result = result + result * rate / 100;
+                    return result;
+                }
+            }
+
+            Console.WriteLine("\tУрок 29: Перегрузка методов");
+            public void Add(int a, int b) { }
+            public void Add(int a, int b, int c) { }
+            public void Add(double a, double b) { }
+
+            Console.WriteLine("\tУрок 28: Свойства");
+            class Personal
+        {
+            private string name;
+            private int age;
+            public string Name
+            {
+                get
+                {
+                    return name;
+                }
+                set
+                {
+                    name = value;
+                }
+            }
+            public int Age
+            {
+                get
+                {
+                    return age;
+                }
+                set
+                {
+                    age = value;
+                }
+            }
+            public string Fulla
+            {
+                get
+                {
+                    return $"{name}{age}";
+                }
+            }
+        }
+        Personal Jenua = new Personal();
+            Jenua.Age = 21;
+            Jenua.Name = "Jenua";
+            Console.WriteLine(Jenua.Fulla);
+
+
+            Console.WriteLine("\tУрок 27: Модификаторы доступа");
+            public int a; //Доступен везде
+            private int b; //Доступен только в данном классе
+            protected int c; //Доступен только в данном классе и в наследниках
+            internal int d; //Доступен только в данном пространстве имён
+            protected internal int e; //Доступен только в данном пространстве имён и в классах наследниках
+
+             Console.WriteLine("\tУрок 26: Пространство имён");
+             using Hello.Account;
+              namespace Hello
+            {
+                class Program
+                {
+
+                }
+                namespace Account
+                {
+                    class Account
+                    {
+
+                    }
+                }
+            }
+
+            Console.WriteLine("\tУрок 25: Псевдонимы");
+                using printer = System.Console;
+                printer.WriteLine();
+
+                Console.WriteLine("\tУрок 24: Структуры");
+                struct Usa
+
+                public string name;
+                public int age;
+                public void Display()
+                {
+                    Console.WriteLine($"age = {age};name ={name}");
+                }
+                Usa tom;
+                tom.name = "Toma";
+                tom.age = 21;
+                tom.Display();
+
+            Console.WriteLine("\tУрок 23: Классы");
+            class Persona
+        {
+            public string name;
+            public int age;
+            public Persona() : this("Нет") { }
+            public Persona(string name) : this(name, 18) { }
+            public Persona(string name, int age) { this.name = name; this.age = age; }
+            public void Show()
+            {
+                Console.WriteLine($"Name = {name}; age = {age}");
+            }
+
+        }
+
+        Persona bob = new Persona() { };
+            Persona tom = new Persona() { name = "Tom" };
+            Persona helli = new Persona() { name = "helli", age = 22 };
+            tom.Show();
+            bob.Show();
+            helli.Show();
+
             Console.WriteLine("\tУрок 22: Кортежи");
             private static (int, string) GetSecretsValue()
             {
@@ -51,7 +219,7 @@ namespace ConsoleApp
             Console.WriteLine("Name=" + name);
             Console.WriteLine("Age=" + age);
 
-            
+
         Console.WriteLine("\tУрок 21: Перечисление enum");
         enum Operation
         {
@@ -151,12 +319,12 @@ namespace ConsoleApp
             Rerk(z, b, out aq);
             Console.WriteLine($"aq before ref = {aq}");
             Peri(z, b);
-            
+
             Console.WriteLine($"z = {z}");
             PeriRef(ref z, b);
-          
+
             Console.WriteLine($"z = {z}");
-          
+
             Rerk(z, b, out aq);
             Console.WriteLine($"aq after ref = {aq}");
 
@@ -177,7 +345,7 @@ namespace ConsoleApp
             static void SayHello() => Console.WriteLine("It's work");
             Prima();
             SayHello();
-            
+
             Console.WriteLine("\tУрок 15: Сортировка массива");
 
             int[] num = new int[7];
@@ -220,7 +388,7 @@ namespace ConsoleApp
             {
                 Console.WriteLine(Nu);
             }  
-             
+
             Console.WriteLine("\tУрок 13: Многомерные массивы");
             int[,] num = { { 0, 1, 2, 3 }, { 4, 5, 6, 7 } };
 
@@ -253,7 +421,7 @@ namespace ConsoleApp
             Console.WriteLine("\tУрок 11: Циклы");
 
             int j=0, k=0;
-            
+
             for (int i = 0; i<9;i++)
             {
                 Console.Write($"{i} ");
@@ -292,7 +460,7 @@ namespace ConsoleApp
             {
                 Console.WriteLine("8>10");
             }
-            
+
             if (true)
             {
                 Console.WriteLine("True");
@@ -324,7 +492,7 @@ namespace ConsoleApp
                 default:
                     break;
             }
-            
+
             Console.WriteLine("\tУрок 9: Условные выражения и логические операции");
             int a = 10;
             int b = 15;
@@ -358,7 +526,7 @@ namespace ConsoleApp
                 $"(5 > 6) || (4 > 6) = {x6}\n" +
                 $"Tru = true   - {Tru} \n" +
                 $"Fal = !Tru   - {Fal}");
-            
+
             Console.WriteLine("\tУрок 8: Операции присваивания");
             int a = 10;
             Console.WriteLine($"a={a}\n" +
@@ -449,7 +617,7 @@ namespace ConsoleApp
             int age = 22;
             Console.WriteLine($"1)Моё имя {name}, мой возраст {age}");
             Console.WriteLine("2)Моё имя {0}, мой возраст {1}",name,age); 
-            
+
             Console.WriteLine("\tУрок 2: Типы данных");
             bool isActive = true;
             bool isPassiv = false;
@@ -505,3 +673,4 @@ namespace ConsoleApp
         }
     }
 }
+
