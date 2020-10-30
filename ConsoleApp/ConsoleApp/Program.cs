@@ -2,23 +2,167 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Globalization;
 
 namespace ConsoleApp
 {
 
-    class Person
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-       
-    }
+  
     class Program 
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("\tУрок 71:  Класс StringBuilder");
+            Console.WriteLine("\tУрок 78:  Многопоточность");
+
+            
+
+
+
             /* 
-           
+           Console.WriteLine("\tУрок 77:  Span");
+            //Example 1
+            string[] people = new string[] { "Tom", "Bob", "Jorj" };
+            Span<string> peopleSpan = people; //Span<string> peopleSpan = new Span<string>(people);
+            peopleSpan[1] = "Ann";              // переустановка значения элемента
+            Console.WriteLine(peopleSpan[2]);   // получение элемента
+            Console.WriteLine(peopleSpan.Length);   // получение длины Span
+            foreach (var s in peopleSpan) // перебор Span
+            {
+                Console.WriteLine(s);
+            }
+            //Example 2
+            int[] temperatures = new int[]
+            {
+                10, 12, 13, 14, 15, 11, 13, 15, 16, 17,
+                18, 16, 15, 16, 17, 14,  9,  8, 10, 11,
+                12, 14, 15, 15, 16, 15, 13, 12, 12, 11
+            };
+            Span<int> temperaturesSpan = temperatures;
+            Span<int> firstDecade = temperaturesSpan.Slice(0, 10);    // нет выделения памяти под данные
+            Span<int> lastDecade  = temperaturesSpan.Slice(20, 10);   // нет выделения памяти под данные
+            Console.WriteLine("\tУрок 76:  Array");
+            int[] numbers = { -4, -3, -2, -1, 0, 1, 2, 3, 4 };
+            Array.Reverse(numbers);       // расположим в обратном порядке                 
+            Array.Resize(ref numbers, 4); // уменьшим массив до 4 элементов
+            foreach (int number in numbers)
+            {
+                Console.Write($"{number} \t");
+            }
+            int[] numbers2 = { -4, -3, -2, -1, 0, 1, 2, 3, 4 };
+            int[] numbers3 = new int[5];
+            Array.Copy(numbers2, 2, numbers3, 0, 5);// копируем из numbers с 2-го индекса 5 элементов и поместим их в массив numbers2, начиная с 0-го индекса
+            foreach (int number in numbers3)
+            {
+                Console.Write($"{number} \t");
+            }
+            Console.WriteLine();
+            Array.Sort(numbers2);
+            foreach (int number in numbers2)
+            {
+                Console.Write($"{number} \t");
+            }
+            Console.WriteLine("\tУрок 75:  Convert");
+            //Parse
+            int a = int.Parse("21");
+            Console.WriteLine($"int a = {a}, ++a = {++a}");
+            double b = double.Parse("21,12");
+            Console.WriteLine($"double b = {b}, ++b = {++b}");
+            byte c = byte.Parse("3");
+            Console.WriteLine($"byte c = {c}, ++c = {++c}");
+            //Задание формата
+            IFormatProvider format = new NumberFormatInfo { NumberDecimalSeparator = "." };
+            double fo = double.Parse("12,21", format);
+            double ro = double.Parse("12.21", format);
+            Console.WriteLine($",={fo} ; .={ro}");
+            //TryParse
+            double number;
+            bool result = double.TryParse("21", out number);
+            if (result)
+            {
+                Console.WriteLine($"Top {number}");
+            }
+            else
+            {
+                Console.WriteLine($"Lose {number}");
+            }
+            //Convert 
+             int n = Convert.ToInt32("23");
+            bool b = true;
+            double d = Convert.ToDouble(b);
+            Console.WriteLine($"n={n}  d={d}");
+            int fg = Convert.ToInt32("12");
+            Console.WriteLine("\tУрок 74:  Math");
+            double result = Math.Abs(-12.4); // 12.4
+            double result2 = Math.BigMul(100, 9340); // 934000
+            double result3 = Math.Floor(2.56); // 2
+            double result4 = Math.Ceiling(2.34); // 3
+            double result5 = Math.IEEERemainder(26, 4);
+            double result6 = Math.Round(20.56); // 21
+            double result7 = Math.Round(20.46); //20
+            double result8 = Math.Sqrt(16); // 4
+            double result9 = Math.Truncate(16.89); // 16
+            double result10 = Math.E;
+            double result11 = Math.PI;
+            int result12 = Math.Sign(15); // 1
+            int result13 = Math.Sign(-5); //-1
+            Console.WriteLine("\tУрок 73:  Форматирование даты и времени");
+            DateTime now = DateTime.Now;
+            Console.WriteLine("D: " + now.ToString("D"));
+            Console.WriteLine("d: " + now.ToString("d"));
+            Console.WriteLine("F: " + now.ToString("F"));
+            Console.WriteLine("f: {0:f}", now);
+            Console.WriteLine("G: {0:G}", now);
+            Console.WriteLine("g: {0:g}", now);
+            Console.WriteLine("M: {0:M}", now);
+            Console.WriteLine("O: {0:O}", now);
+            Console.WriteLine("o: {0:o}", now);
+            Console.WriteLine("R: {0:R}", now);
+            Console.WriteLine("s: {0:s}", now);
+            Console.WriteLine("T: {0:T}", now);
+            Console.WriteLine("t: {0:t}", now);
+            Console.WriteLine("U: {0:U}", now);
+            Console.WriteLine("u: {0:u}", now);
+            Console.WriteLine("Y: {0:Y}", now);
+            Console.WriteLine(now.ToString("hh:mm:ss"));
+            Console.WriteLine(now.ToString("dd.MM.yyyy"));
+            Console.WriteLine("\tУрок 72:  Работа с датами и временем");
+            DateTime date = new DateTime(2015,11,15,15,14,51); // год - месяц - день - час - минута - секунда
+            Console.WriteLine(date);
+            Console.WriteLine(DateTime.Now); //Сейчас - время компьютера
+            Console.WriteLine(DateTime.UtcNow); //дата и время относительно времени по Гринвичу (GMT)
+            Console.WriteLine(DateTime.Today); // Только текущая дата
+            //Операции с датой
+            DateTime date5 = new DateTime(2015, 7, 20, 18, 30, 25); // 20.07.2015 18:30:25
+            Console.WriteLine(date5.AddHours(3)); // 20.07.2015 21:30:25
+            DateTime date3 = new DateTime(2015, 7, 20, 18, 30, 25); // 20.07.2015 18:30:25
+            DateTime date4 = new DateTime(2015, 7, 20, 15, 30, 25); // 20.07.2015 15:30:25
+            Console.WriteLine(date3.Subtract(date4)); // 03:00:00
+            //Форматировние
+            DateTime date1 = new DateTime(2015, 7, 20, 18, 30, 25);
+            Console.WriteLine(date1.ToLocalTime()); // 20.07.2015 21:30:25
+            Console.WriteLine(date1.ToUniversalTime()); // 20.07.2015 15:30:25
+            Console.WriteLine(date1.ToLongDateString()); // 20 июля 2015 г.
+            Console.WriteLine(date1.ToShortDateString()); // 20.07.2015
+            Console.WriteLine(date1.ToLongTimeString()); // 18:30:25
+            Console.WriteLine(date1.ToShortTimeString()); // 18:30
+            Console.WriteLine("\tУрок 71:  Класс StringBuilder");
+            StringBuilder text = new StringBuilder("Привет мир");
+            Console.WriteLine($"Длина строки: {text.Length}"); //длина строки
+            Console.WriteLine($"Емкость памяти: {text.Capacity}"); //ёмкость выделенной памяти.
+            text.Append(" конец строки"); //добавляет подстроку
+            Console.WriteLine($"Длина строки: {text.Length}"); //22
+            Console.WriteLine($"Емкость памяти: {text.Capacity}"); // 32
+            //вставляет подстроку в объект StringBuilder, начиная с определенного индекса
+            text.Insert(7, " (текст с 7 символа) "); 
+            Console.WriteLine(text);
+            // удаляем 13 символов, начиная с 7-го
+            text.Remove(7, 20);
+            Console.WriteLine(text);
+            // получаем строку из объекта StringBuilder
+            string s = text.ToString();
+            Console.WriteLine(s);
+
              Console.WriteLine("\tУрок 70:  Форматирование и интерполяция строк");
             Person person = new Person { Name = "Jen", Age = 12};
             string output = ($"Имя: {person.Name}  Возраст: {person.Age}");
