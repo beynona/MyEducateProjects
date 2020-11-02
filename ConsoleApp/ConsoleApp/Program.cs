@@ -4,23 +4,222 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Globalization;
+using System.Threading;
 
 namespace ConsoleApp
 {
-
-  
+   
     class Program 
     {
+        
+
         static void Main(string[] args)
         {
-            Console.WriteLine("\tУрок 78:  Многопоточность");
 
-            
+
 
 
 
             /* 
-           Console.WriteLine("\tУрок 77:  Span");
+           Console.WriteLine("\tУрок 85: Таймеры");
+            int num = 10;
+            // устанавливаем метод обратного вызова
+            TimerCallback tm = new TimerCallback(Count);
+            // создаем таймер
+            Timer timer = new Timer(tm, num, 0, 2000);
+            public static void Count(object obj)
+            {
+                int x = (int)obj;
+                for (int i = 1; i < 9; i++, x++)
+                {
+                    Console.WriteLine($"{x * i}");
+                }
+            }
+            Console.WriteLine("\tУрок 84: Семафоры");
+                for (int i = 1; i < 6; i++)
+                {
+                    Reader reader = new Reader(i);
+                }
+                 class Reader
+            {
+                // создаем семафор
+                static Semaphore sem = new Semaphore(3, 3);
+                Thread myThread;
+                int count = 3;// счетчик чтения
+
+                public Reader(int i)
+                {
+                    myThread = new Thread(Read);
+                    myThread.Name = $"Читатель {i.ToString()}";
+                    myThread.Start();
+                }
+
+                public void Read()
+                {
+                    while (count > 0)
+                    {
+                        sem.WaitOne();
+
+                        Console.WriteLine($"{Thread.CurrentThread.Name} входит в библиотеку");
+
+                        Console.WriteLine($"{Thread.CurrentThread.Name} читает");
+                        Thread.Sleep(1000);
+
+                        Console.WriteLine($"{Thread.CurrentThread.Name} покидает библиотеку");
+
+                        sem.Release();
+
+                        count--;
+                        Thread.Sleep(1000);
+                    }
+                }
+            }
+                Console.WriteLine("\tУрок 83: Мьютексты");
+            static Mutex mutexObj = new Mutex();
+            static int x = 0;
+            public static void Count()
+            {
+                mutexObj.WaitOne();
+                x = 1;
+                for (int i = 1; i < 9; i++)
+                {
+                    Console.WriteLine($"{Thread.CurrentThread.Name}: {x}");
+                    x++;
+                    Thread.Sleep(100);
+                }
+                mutexObj.ReleaseMutex();
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                Thread myThread = new Thread(Count);
+                myThread.Name = $"Поток {i}";
+                myThread.Start();
+            }
+            Console.WriteLine("\tУрок 82: Класс AutoResetEvent");
+            static AutoResetEvent waitHandler = new AutoResetEvent(true);
+            static int x = 1;
+            public static void Count()
+            {
+                waitHandler.WaitOne();
+                x = 1;
+                for (int i = 1; i < 9; i++)
+                {
+                    Console.WriteLine($"{Thread.CurrentThread.Name}: {x}");
+                    x++;
+                     Thread.Sleep(100);
+                }
+                waitHandler.Set();
+            }
+            for (int i = 1; i < 5; i++)
+            {
+                Thread myThread = new Thread(Count);
+                myThread.Name = $"Поток {i.ToString()}";
+                myThread.Start();
+            }
+
+            Console.WriteLine("\tУрок 81: Синхронизация. Ключевое слово lock");
+
+            static int x = 0;
+            static object locker = new object();
+            public static void Count()
+            {
+                lock (locker)
+                {
+                    x = 1;
+                    for (int i = 1; i < 5; i++)
+                    {
+                        Console.WriteLine($"{Thread.CurrentThread.Name}: {x}");
+                        x++;
+                    }
+                }
+
+            }
+
+            for (int i = 1; i < 9; i++)
+            {
+                Thread thread = new Thread(Count);
+                thread.Name = "Поток " + i.ToString();
+                thread.Start();
+            }
+             Console.WriteLine("\tУрок 80: Потоки с параметрами");
+             class Counter
+        {
+            private int x;
+            private int y;
+            public Counter(int _x, int _y)
+            {
+                this.x = _x;
+                this.y = _y;
+            }
+            public void Count()
+            {
+                for (int i = 1; i < 9; i++)
+                {
+                    Console.WriteLine($"Второй поток i*x*y={i * x * y}");
+                    Thread.Sleep(400);
+                }
+            }
+        }
+        public static void Count(object x)
+        {
+            for (int i = 1; i < 9; i++)
+            {
+                int n = (int)x;
+                Console.WriteLine($"Первый поток i*n={i * n}");
+                Thread.Sleep(400);
+            }
+        }
+        //1 поток
+        int number = 5;
+            Thread thread1 = new Thread(new ParameterizedThreadStart(Count));
+            thread1.Start(number);
+
+            //2 поток
+            Counter counter = new Counter(2, 5);
+            Thread thread2 = new Thread(counter.Count);
+            thread2.Start();
+            Console.WriteLine("\tУрок 79: Создание потоков");
+            public static void Count()
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    Console.WriteLine("Второй поток:");
+                    Thread.Sleep(400);
+                }
+            }
+            public static void Count2()
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    Console.WriteLine("Третий поток:");
+                    Thread.Sleep(500);
+                }
+            }
+            Thread thread = new Thread(Count);
+            Thread thread2 = new Thread(Count2);
+
+            thread.Start();
+            thread2.Start();
+
+            for (int i = 0; i < 9; i++)
+            {
+                Console.WriteLine("Первый поток:");
+
+                Thread.Sleep(400);
+            }
+            Console.WriteLine("\tУрок 78:  Потоки");
+
+            Thread t = Thread.CurrentThread;// получаем текущий поток
+            Console.WriteLine($"Имя потока до Name: {t.Name}");//получаем имя потока
+            t.Name = "Метод Main";
+            Console.WriteLine($"Имя потока после Name: {t.Name}");
+            Console.WriteLine($"CurrentCulture: {t.CurrentCulture}");
+            Console.WriteLine($"Фоновый ли поток: {t.IsBackground}");
+            Console.WriteLine($"Запущен ли поток: {t.IsAlive}");
+            Console.WriteLine($"Приоритет потока: {t.Priority}");
+            Console.WriteLine($"Статус потока: {t.ThreadState}");
+            Console.WriteLine($"Домен приложения: {Thread.GetDomain().FriendlyName}"); // получаем домен приложения
+            Console.WriteLine("\tУрок 77:  Span");
             //Example 1
             string[] people = new string[] { "Tom", "Bob", "Jorj" };
             Span<string> peopleSpan = people; //Span<string> peopleSpan = new Span<string>(people);
@@ -269,7 +468,7 @@ namespace ConsoleApp
             string hello = "Hello world!";
             Console.WriteLine(hello.ToLower()); // hello world!
             Console.WriteLine(hello.ToUpper()); // HELLO WORLD!
-            
+
             Console.WriteLine("\tУрок 68:  Итераторы и оператор yield");
             class Numbers
             {
