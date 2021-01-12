@@ -1,2 +1,3 @@
-# MyEducateProjects
- Language course С#
+<h3> MyEducate Projects С# </h3>
+<h4> Маленький помощник с изученными темами,а так же их удобное расположение для быстрого доступа</h4>
+<img src="res/main.png">
