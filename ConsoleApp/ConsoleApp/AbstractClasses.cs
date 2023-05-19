@@ -9,7 +9,7 @@ namespace ConsoleApp
     {
         void Print()
         {
-            Rectangle rectangle = new Rectangle(5, 4, 34);
+            Figura rectangle = new Rectangle(5, 4, 34);
             rectangle.Display();
         }
     } //Абстрактные классы                   
